@@ -1,4 +1,4 @@
-class Len < ApplicationRecord
+class Lens < ApplicationRecord
   has_many :listings, dependent: :destroy
 
   validates :brand, presence: true

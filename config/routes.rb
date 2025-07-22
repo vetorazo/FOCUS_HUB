@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "lens#index"
+  root to: "lenses#index"
   get "/about", to: "pages#about"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :lens, only: %i[index show] do
+  resources :lenses, only: %i[index show] do
     resources :listings, only: %i[index]
   end
   resources :listings, olny: %i[show]
