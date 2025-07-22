@@ -1,0 +1,9 @@
+<h1>Listings for <%= @len.brand %> <%= @len.model %></h1>
+<ul>
+  <% @listings.each do |listing| %>
+    <li>
+      <%= link_to "View Listing", len_listing_path(@len, listing) %>
+      - ¥ <%= listing.daily_rate %> - <%= listing.owner_description %>
+    </li>
+  <% end %>
+</ul>

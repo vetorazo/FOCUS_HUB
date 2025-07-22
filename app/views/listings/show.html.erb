@@ -1,0 +1,8 @@
+<h1>Listing for <%= @listing.len.brand %> <%= @listing.len.model %></h1>
+
+<p>Owner: <%= @listing.user.first_name %> <%= @listing.user.last_name %></p>
+<p>Address: <%= @listing.user.address %></p>
+<p>¥<%= @listing.daily_rate %> per day</p>
+<p><%= @listing.owner_description %></p>
+
+<%= link_to "Back to lens", len_listings_path(@listing.len) %>
