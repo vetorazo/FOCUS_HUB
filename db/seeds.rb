@@ -216,4 +216,49 @@ lenses.each do |lens|
   Lens.create!(lens)
 end
 
-puts "Finished creating lenses!"
+puts "Finished creating lens!"
+
+puts "Creating sample users..."
+User.destroy_all
+users = [
+  { email: "bruno@example.com", password: "password", first_name: "Bruno", last_name: "Vetorazo", user_name: "bruno_vetorazo", address: "123 Main St, Anytown, Japan" },
+  { email: "phuong@example.com", password: "password", first_name: "Phuong", last_name: "Mai", user_name: "phuong_mai", address: "456 Elm St, Anytown, Japan" },
+  { email: "hannah@example.com", password: "password", first_name: "Hannah", last_name: "Lapasaran", user_name: "hannah_lapasaran", address: "789 Oak St, Anytown, Japan" },
+  { email: "takatomo@example.com", password: "password", first_name: "Homma", last_name: "Takatomo", user_name: "takatomo_homma", address: "101 Pine St, Anytown, Japan" }
+]
+users = users.map { |attrs| User.create!(attrs) }
+
+puts "Creating sample listings..."
+
+# Get lens and users
+all_lenses = Lens.all
+all_users = User.all
+
+# Example listings
+Listing.destroy_all
+Listing.create!(
+  user: all_users[0],
+  lens: all_lenses.sample,
+  daily_rate: 2500,
+  owner_description: "Well maintained, perfect for wildlife photography."
+)
+Listing.create!(
+  user: all_users[1],
+  lens: all_lenses.sample,
+  daily_rate: 1850,
+  owner_description: "Lightly used, comes with a carrying case."
+)
+Listing.create!(
+  user: all_users[2],
+  lens: all_lenses.sample,
+  daily_rate: 3000,
+  owner_description: "Top condition, ideal for portraits and events."
+)
+Listing.create!(
+  user: all_users[3],
+  lens: all_lenses.sample,
+  daily_rate: 2200,
+  owner_description: "Perfect for landscape and wildlife photography."
+)
+
+puts "Finished creating listings!"
