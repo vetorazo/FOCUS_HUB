@@ -254,5 +254,11 @@ Listing.create!(
   daily_rate: 3000,
   owner_description: "Top condition, ideal for portraits and events."
 )
+Listing.create!(
+  user: all_users[3],
+  len: all_lens.sample,
+  daily_rate: 2200,
+  owner_description: "Perfect for landscape and wildlife photography."
+)
 
 puts "Finished creating listings!"

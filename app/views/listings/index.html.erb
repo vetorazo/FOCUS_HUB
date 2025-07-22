@@ -2,8 +2,9 @@
 <ul>
   <% @listings.each do |listing| %>
     <li>
-      <%= link_to "View Listing", len_listing_path(@len, listing) %>
+      <%= link_to "View Listing", listing_path(listing) %>
       - ¥ <%= listing.daily_rate %> - <%= listing.owner_description %>
     </li>
   <% end %>
 </ul>
+<%= link_to "Back to Home", root_path %>
