@@ -9,11 +9,11 @@
 #   end
 
 puts "Clearing the database..."
-Len.destroy_all
+Lens.destroy_all
 
-puts "Creating 20 lens..."
+puts "Creating 20 lenses..."
 
-lens = [
+lenses = [
   {
     brand: "Canon",
     model: "RF100-500mm F4.5-7.1 L IS USM",
@@ -212,8 +212,8 @@ lens = [
   }
 ]
 
-lens.each do |len|
-  Len.create!(len)
+lenses.each do |lens|
+  Lens.create!(lens)
 end
 
-puts "Finished creating lens!"
+puts "Finished creating lenses!"

@@ -1,12 +1,12 @@
 <div class="container my-3">
   <h1>All lenses you can find 👇</h1>
-    <% @lens.each do |len| %>
+    <% @lenses.each do |lens| %>
       <hr>
-        <h5><strong><%= len.brand %></strong></h5>
-        <p>Model: <%= len.model %></p>
+        <h5><strong><%= lens.brand %></strong></h5>
+        <p>Model: <%= lens.model %></p>
         <p>Description</p>
         <ul>
-          <% len.description.each do |description_item| %>
+          <% lens.description.each do |description_item| %>
             <li><%= description_item %></li>
           <% end %>
         </ul>
