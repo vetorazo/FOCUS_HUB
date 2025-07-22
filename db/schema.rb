@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_22_120300) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_22_120301) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,12 +24,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_22_120300) do
 
   create_table "listings", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "len_id", null: false
+    t.bigint "lens_id", null: false
     t.integer "daily_rate"
     t.text "owner_description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["len_id"], name: "index_listings_on_len_id"
+    t.index ["lens_id"], name: "index_listings_on_lens_id"
     t.index ["user_id"], name: "index_listings_on_user_id"
   end
 
@@ -49,6 +49,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_22_120300) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "listings", "lens"
+  add_foreign_key "listings", "lenses"
   add_foreign_key "listings", "users"
 end

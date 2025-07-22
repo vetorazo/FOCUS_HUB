@@ -1,7 +1,7 @@
 class ListingsController < ApplicationController
   def index
-    @len = Len.find(params[:len_id])
-    @listings = Listing.where(len_id: @len.id)
+    @lens = Lens.find(params[:lens_id])
+    @listings = Listing.where(lens_id: @lens.id)
   end
 
   def show

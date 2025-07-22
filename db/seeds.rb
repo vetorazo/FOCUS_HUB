@@ -231,32 +231,32 @@ users = users.map { |attrs| User.create!(attrs) }
 puts "Creating sample listings..."
 
 # Get lens and users
-all_lens = Len.all
+all_lenses = Lens.all
 all_users = User.all
 
 # Example listings
 Listing.destroy_all
 Listing.create!(
   user: all_users[0],
-  len: all_lens.sample,
+  lens: all_lenses.sample,
   daily_rate: 2500,
   owner_description: "Well maintained, perfect for wildlife photography."
 )
 Listing.create!(
   user: all_users[1],
-  len: all_lens.sample,
+  lens: all_lenses.sample,
   daily_rate: 1850,
   owner_description: "Lightly used, comes with a carrying case."
 )
 Listing.create!(
   user: all_users[2],
-  len: all_lens.sample,
+  lens: all_lenses.sample,
   daily_rate: 3000,
   owner_description: "Top condition, ideal for portraits and events."
 )
 Listing.create!(
   user: all_users[3],
-  len: all_lens.sample,
+  lens: all_lenses.sample,
   daily_rate: 2200,
   owner_description: "Perfect for landscape and wildlife photography."
 )
