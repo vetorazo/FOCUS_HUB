@@ -75,3 +75,6 @@ end
 
 # Devise for authentication
 gem "devise"
+
+# Gosting images
+gem "cloudinary"
