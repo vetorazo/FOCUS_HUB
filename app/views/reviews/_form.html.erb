@@ -1,0 +1,5 @@
+<%= simple_form_for([listing, review] || Review.new ) do |f| %>
+  <%= f.input :content, as: :text, label: "Your Review" %>
+  <%= f.input :rating, as: :integer, label: "Rating (1-5)" %>
+  <%= f.button :submit, "Submit Review" %>
+<% end %>
