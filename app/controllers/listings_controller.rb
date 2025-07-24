@@ -6,5 +6,7 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.find(params[:id])
+    @reviews = @listing.reviews.includes(:user)
+    @review = @listing.reviews.new
   end
 end

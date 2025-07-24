@@ -13,5 +13,7 @@ Rails.application.routes.draw do
   resources :lenses, only: %i[index show] do
     resources :listings, only: %i[index]
   end
-  resources :listings, olny: %i[show]
+  resources :listings, only: %i[show] do
+    resources :reviews, only: %i[new create]
+  end
 end
