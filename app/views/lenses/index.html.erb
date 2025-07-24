@@ -5,11 +5,8 @@
         <h5><strong><%= lens.brand %></strong></h5>
         <p>Model: <%= lens.model %></p>
         <p>Description</p>
-        <ul>
-          <% lens.description.each do |description_item| %>
-            <li><%= description_item %></li>
-          <% end %>
-        </ul>
+        <p><%= lens.description %></p>
+        <%= cl_image_tag(lens.photo.key) %>
         <%= link_to "View listings", lens_listings_path(lens.id) %>
     <% end %>
 </div>

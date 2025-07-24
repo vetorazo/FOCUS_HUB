@@ -1,9 +1,10 @@
-<h1>Listings for <%= @lens.brand %> <%= @lens.model %></h1>
+<h1>Listings for <strong><%= @lens.brand %></strong>: <%= @lens.model %></h1>
 <ul>
   <% @listings.each do |listing| %>
     <li>
       <%= link_to "View Listing", listing_path(listing) %>
       - ¥ <%= listing.daily_rate %> - <%= listing.owner_description %>
+      <%= image_tag "https://image.pollinations.ai/prompt/lens+for+camera+#{listing.lens.model.gsub(' ', '+')}", width: 150, height: 150 %>
     </li>
   <% end %>
 </ul>
