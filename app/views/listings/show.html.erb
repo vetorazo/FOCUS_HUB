@@ -4,6 +4,7 @@
 <p>Address: <%= @listing.user.address %></p>
 <p>¥<%= @listing.daily_rate %> per day</p>
 <p><%= @listing.owner_description %></p>
+<%= image_tag "https://image.pollinations.ai/prompt/lens+for+camera+#{@listing.lens.model.gsub(' ', '+')}", width: 150, height: 150 %>
 
 <%= render 'reviews/form', review: @listing.reviews.new, listing: @listing %>
 <h3>Reviews</h3>
