@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'bookings/new'
-  get 'bookings/create'
   devise_for :users
   root to: "lenses#index"
   get "/about", to: "pages#about"
@@ -16,7 +14,7 @@ Rails.application.routes.draw do
     resources :listings, only: %i[index]
   end
   resources :listings, only: %i[show] do
-    resources :bookings, only: %i[new create]
-    resources :reviews, only: %i[new create]
+    resources :bookings, only: %i[create]
+    resources :reviews, only: %i[create]
   end
 end
