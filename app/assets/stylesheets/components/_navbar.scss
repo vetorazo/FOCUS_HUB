@@ -10,3 +10,18 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
+
+.navbar-lewagon .navbar-brand .brand-text {
+  font-family: $headers-font;
+  font-size: 2rem;
+  font-weight: 700;
+  color: $gray;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    color: darken($gray, 10%);
+  }
+}
