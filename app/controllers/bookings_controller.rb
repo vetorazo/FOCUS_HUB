@@ -1,15 +1,11 @@
 class BookingsController < ApplicationController
   before_action :set_listing
 
-  def new
-    @booking = @listing.bookings.new
-  end
-
   def create
-    @booking = @listings.bookings.new(booking_params)
+    @booking = Booking.new(booking_params)
+    @booking.listing = @listing
     @booking.user = current_user
     @booking.total_price = calculate_total_price
-    @booking.status = "pending"
 
     if @booking.save
       redirect_to @listing, notice: "Lens booked successfully!"
@@ -21,7 +17,7 @@ class BookingsController < ApplicationController
   private
 
   def set_listing
-    @listings = Listing.find(params[:listing_id])
+    @listing = Listing.find(params[:listing_id])
   end
 
   def booking_params
@@ -29,7 +25,7 @@ class BookingsController < ApplicationController
   end
 
   def calculate_total_price
-    number_of_days = (@booking.end_date - @booking.start_date).total_price
+    number_of_days = (@booking.end_date - @booking.start_date)
     number_of_days * @listing.daily_rate
   end
 end
