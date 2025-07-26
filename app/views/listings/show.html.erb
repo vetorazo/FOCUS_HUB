@@ -4,5 +4,19 @@
 <p>Address: <%= @listing.user.address %></p>
 <p>¥<%= @listing.daily_rate %> per day</p>
 <p><%= @listing.owner_description %></p>
+<%= image_tag "https://image.pollinations.ai/prompt/lens+for+camera+#{@listing.lens.model.gsub(' ', '+')}", width: 150, height: 150 %>
 
+<%= render 'reviews/form', review: @listing.reviews.new, listing: @listing %>
+<h3>Reviews</h3>
+<% if @reviews.any? %>
+  <% @reviews.each do |review| %>
+  <div class="review">
+  <strong><%= review.user.user_name %></strong>
+  <span>Rating: <%= review.rating %>/5</span>
+  <p><%= review.content %></p>
+  </div>
+  <% end %>
+<% else %>
+  <p>No Reviews Yet</p>
+<% end %>
 <%= link_to "Back to lens", lens_listings_path(@listing.lens) %>
