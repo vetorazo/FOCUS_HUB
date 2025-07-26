@@ -6,7 +6,10 @@
 <p><%= @listing.owner_description %></p>
 <%= image_tag "https://image.pollinations.ai/prompt/lens+for+camera+#{@listing.lens.model.gsub(' ', '+')}", width: 150, height: 150 %>
 
-<%= render 'reviews/form', review: @listing.reviews.new, listing: @listing %>
+<% unless @listing.bookings.where(user: current_user).empty? %>
+  <%= render 'reviews/form', review: @listing.reviews.new, listing: @listing %>
+<% end %>
+
 <hr>
 <h3>Reviews</h3>
 <% if @reviews.any? %>
