@@ -10,5 +10,6 @@ class ListingsController < ApplicationController
     @listing = Listing.find(params[:id])
     @reviews = @listing.reviews.includes(:user)
     @review = @listing.reviews.new
+    @booking = Booking.new
   end
 end
