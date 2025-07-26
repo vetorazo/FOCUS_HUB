@@ -13,6 +13,7 @@ class ReviewsController < ApplicationController
       redirect_to listing_path(@listing)
     else
       @reviews = @listing.reviews.all
+      @booking = @listing.bookings.new
       render "listings/show", status: :unprocessable_entity
     end
   end
