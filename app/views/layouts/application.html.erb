@@ -15,9 +15,9 @@
     <%= render "shared/flashes" %>
     <div class="container">
       <%= yield %>
-      <% if user_signed_in? %>
-        <h2> Welcome to FocusHub, <%= current_user.email %></h2>
-      <% end %>
+      <%# <% if user_signed_in? %>
+        <%# <h2> Welcome to FocusHub, <%= current_user.email</h2> %>
+      <%# <% end %>
     </div>
   </body>
 </html>
