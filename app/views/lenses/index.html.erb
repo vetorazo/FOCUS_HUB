@@ -1,12 +1,19 @@
-<div class="container my-3">
-  <h1>All lenses you can find 👇</h1>
+<div class="container mt-4">
+  <h1 class="mb-4">All lenses you can find 👇</h1>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
     <% @lenses.each do |lens| %>
-      <hr>
-        <h5><strong><%= lens.brand %></strong></h5>
-        <p>Model: <%= lens.model %></p>
-        <p>Description</p>
-        <p><%= lens.description %></p>
-        <%= cl_image_tag(lens.photo.key) %>
-        <%= link_to "View listings", lens_listings_path(lens.id) %>
+      <div class="col">
+        <div class="card h-100 rounded">
+          <%= cl_image_tag(lens.photo.key, class: "card-img-top", style: "height: 180px; object-fit: contain;background-color: #f8f9fa;") %>
+          <div class="card-body">
+            <h5 class="card-title"><strong><%= lens.brand %></strong></h5>
+            <p class="card-text"><strong>Model:</strong> <%= lens.model %></p>
+            <p class="card-text"><%= truncate(lens.description, length: 80, separator: ' ') %></p>
+            <%= link_to "View listings", lens_listings_path(lens.id), class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
     <% end %>
+  </div>
 </div>
