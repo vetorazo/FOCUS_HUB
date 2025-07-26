@@ -1,51 +1,78 @@
-<h1>Listing for <%= @listing.lens.brand %> <%= @listing.lens.model %></h1>
-
-<p>Owner: <%= @listing.user.first_name %> <%= @listing.user.last_name %></p>
-<p>Address: <%= @listing.user.address %></p>
-<p>¥<%= @listing.daily_rate %> per day</p>
-<p><%= @listing.owner_description %></p>
-<%= image_tag "https://image.pollinations.ai/prompt/lens+for+camera+#{@listing.lens.model.gsub(' ', '+')}", width: 150, height: 150 %>
-
-<% unless @listing.bookings.where(user: current_user).empty? %>
-  <%= render 'reviews/form', review: @review, listing: @listing %>
-<% end %>
-
-<hr>
-<h3>Reviews</h3>
-<% if @reviews.any? %>
-  <% @reviews.each do |review| %>
-  <div class="review">
-  <strong><%= review.user.user_name %></strong>
-  <span>Rating: <%= review.rating %>/5</span>
-  <p><%= review.content %></p>
+<div class="container mt-4">
+  <!-- Top section: Lens and owner info -->
+  <div class="row align-items-center mb-4">
+    <div class="col-12 mb-2">
+      <h2 class="mb-0">
+        <%= @listing.lens.brand %> <%= @listing.lens.model %>
+        <small class="text-muted ms-3" style="font-size: 1.5rem;">
+          Owner: <%= @listing.user.first_name %> <%= @listing.user.last_name %>
+        </small>
+      </h2>
+    </div>
+    <div class="col-md-4 text-center mb-3 mb-md-0">
+      <%= image_tag "https://image.pollinations.ai/prompt/lens+for+camera+#{@listing.lens.model.gsub(' ', '+')}", class: "img-fluid rounded", style: "max-height: 250px;" %>
+    </div>
+    <div class="col-md-8">
+      <div class="card h-100">
+        <div class="card-body d-flex flex-column h-100">
+          <h5 class="card-title">Description</h5>
+          <p class="card-text"><%= @listing.owner_description %></p>
+          <div class="mt-auto text-end">
+            <span class="badge rounded-pill bg-danger fs-5">
+              ¥<%= @listing.daily_rate %>/day
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <% end %>
-<% else %>
-  <p>No Reviews Yet</p>
-<% end %>
-<%= link_to "Back to lens", lens_listings_path(@listing.lens) %>
-<hr>
 
-<div class="display-booking-details">
-  <% if @listing.bookings.empty? || !@listing.bookings.empty? && @listing.bookings.where(user: current_user).empty?%>
-    <%# <% if @listing.bookings.where(user: current_user).empty?%>
-      <h4>You have no bookings for this listing yet! Book now! 👇</h4>
+  <% unless @listing.bookings.where(user: current_user).empty? %>
+    <%= render 'reviews/form', review: @review, listing: @listing %>
   <% end %>
-  <% if !@listing.bookings.empty? && !@listing.bookings.where(user: current_user).empty?%>
+
+  <!-- Reviews section at the bottom -->
+  <div class="mt-5">
+    <hr>
+    <h3>Reviews</h3>
+    <% if @reviews.any? %>
+      <% @reviews.each do |review| %>
+        <div class="card mb-3">
+          <div class="card-body">
+            <strong><%= review.user.user_name %></strong>
+            <span class="badge bg-warning text-dark ms-2">Rating: <%= review.rating %>/5</span>
+            <p class="mt-2 mb-0"><%= review.content %></p>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No Reviews Yet</p>
+    <% end %>
+    <%= link_to "Back to lens", lens_listings_path(@listing.lens), class: "btn btn-secondary mt-3" %>
+    <hr>
+  </div>
+
+  <!-- Booking details and form remain unchanged -->
+  <div class="display-booking-details">
+    <% if @listing.bookings.empty? || !@listing.bookings.empty? && @listing.bookings.where(user: current_user).empty?%>
+      <h4>You have no bookings for this listing yet! Book now! 👇</h4>
+    <% end %>
+    <% if !@listing.bookings.empty? && !@listing.bookings.where(user: current_user).empty?%>
       <h4>Your booking details:</h4>
-        <% booking = @listing.bookings.where(user: current_user).last%>
-        <p> Start date: <%= booking.start_date %> </p>
-        <p> End date: <%= booking.end_date %> </p>
-        <p> Total price: ¥<%= booking.total_price %> </p>
-        <p> Status: <%= booking.status.capitalize %> </p>
+      <% booking = @listing.bookings.where(user: current_user).last%>
+      <p> Start date: <%= booking.start_date %> </p>
+      <p> End date: <%= booking.end_date %> </p>
+      <p> Total price: ¥<%= booking.total_price %> </p>
+      <p> Status: <%= booking.status.capitalize %> </p>
+    <% end %>
+  </div>
+  <hr>
+
+  <h2>Book This Listing</h2>
+
+  <%= simple_form_for([@listing, @booking] || Booking.new ) do |f| %>
+    <%= f.input :start_date, as: :date, label: "Start Date" %>
+    <%= f.input :end_date, as: :date, label: "End Date" %>
+    <%= f.button :submit, "Book Now" %>
   <% end %>
 </div>
-<hr>
-
-<h2>Book This Listing</h2>
-
-<%= simple_form_for([@listing, @booking] || Booking.new ) do |f| %>
-  <%= f.input :start_date, as: :date, label: "Start Date" %>
-  <%= f.input :end_date, as: :date, label: "End Date" %>
-  <%= f.button :submit, "Book Now" %>
-<% end %>
