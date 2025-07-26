@@ -7,6 +7,7 @@
 <%= image_tag "https://image.pollinations.ai/prompt/lens+for+camera+#{@listing.lens.model.gsub(' ', '+')}", width: 150, height: 150 %>
 
 <%= render 'reviews/form', review: @listing.reviews.new, listing: @listing %>
+<hr>
 <h3>Reviews</h3>
 <% if @reviews.any? %>
   <% @reviews.each do |review| %>
@@ -20,6 +21,23 @@
   <p>No Reviews Yet</p>
 <% end %>
 <%= link_to "Back to lens", lens_listings_path(@listing.lens) %>
+<hr>
+
+<div class="display-booking-details">
+  <% if @listing.bookings.empty? || !@listing.bookings.empty? && @listing.bookings.where(user: current_user).empty?%>
+    <%# <% if @listing.bookings.where(user: current_user).empty?%>
+      <h4>You have no bookings for this listing yet! Book now! 👇</h4>
+  <% end %>
+  <% if !@listing.bookings.empty? && !@listing.bookings.where(user: current_user).empty?%>
+      <h4>Your booking details:</h4>
+        <% booking = @listing.bookings.where(user: current_user).last%>
+        <p> Start date: <%= booking.start_date %> </p>
+        <p> End date: <%= booking.end_date %> </p>
+        <p> Total price: ¥<%= booking.total_price %> </p>
+        <p> Status: <%= booking.status.capitalize %> </p>
+  <% end %>
+</div>
+<hr>
 
 <h2>Book This Listing</h2>
 
@@ -28,13 +46,3 @@
   <%= f.input :end_date, as: :date, label: "End Date" %>
   <%= f.button :submit, "Book Now" %>
 <% end %>
-
-<div class="display-booking-details">
-  <h4>Your booking details:</h4>
-  <% unless @listing.bookings.empty? %>
-    <% booking = @listing.bookings.where(user: current_user).last%>
-    <p> Start date: <%= booking.start_date %> </p>
-    <p> End date: <%= booking.end_date %> </p>
-    <p> Status: <%= booking.status.capitalize %> </p>
-  <% end %>
-</div>
