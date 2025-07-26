@@ -5,10 +5,23 @@ class Booking < ApplicationRecord
   validates :start_date, :end_date, presence: true
   validate :start_date_cannot_be_in_the_past
   validate :end_date_cannot_be_in_the_past
+  validate :booking_date_cannot_be_reverse
 
-  def expiration_date_cannot_be_in_the_past
-    if expiration_date.present? && expiration_date < Date.today
-      errors.add(:expiration_date, "can't be in the past")
+  def start_date_cannot_be_in_the_past
+    if start_date.present? && start_date < Date.today
+      errors.add(:start_date, "can't be in the past")
+    end
+  end
+
+  def end_date_cannot_be_in_the_past
+    if end_date.present? && end_date < Date.today
+      errors.add(:end_date, "can't be in the past")
+    end
+  end
+
+  def booking_date_cannot_be_reverse
+    if start_date.present? && end_date.present? && end_date < start_date
+      errors.add(:end_date, "can't be before start date")
     end
   end
 

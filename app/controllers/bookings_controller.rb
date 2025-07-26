@@ -10,6 +10,8 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to @listing, notice: "Lens booked successfully!"
     else
+      @reviews = @listing.reviews.all
+      @review = @listing.reviews.new
       render "listings/show", status: :unprocessable_entity
     end
   end

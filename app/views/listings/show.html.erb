@@ -7,7 +7,7 @@
 <%= image_tag "https://image.pollinations.ai/prompt/lens+for+camera+#{@listing.lens.model.gsub(' ', '+')}", width: 150, height: 150 %>
 
 <% unless @listing.bookings.where(user: current_user).empty? %>
-  <%= render 'reviews/form', review: @listing.reviews.new, listing: @listing %>
+  <%= render 'reviews/form', review: @review, listing: @listing %>
 <% end %>
 
 <hr>
