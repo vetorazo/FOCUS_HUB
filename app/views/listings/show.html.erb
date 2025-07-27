@@ -69,10 +69,19 @@
   <hr>
 
   <h2>Book This Listing</h2>
+    <div class="alert-success">
+      <h5>Note: Bookings that start and end on the same day will still be charged the full daily rate.</h5>
+    </div>
 
   <%= simple_form_for([@listing, @booking] || Booking.new ) do |f| %>
-    <%= f.input :start_date, as: :date, label: "Start Date" %>
-    <%= f.input :end_date, as: :date, label: "End Date" %>
+    <%= f.input :start_date,
+                as: :string,
+                label: "Start Date",
+                input_html: { data: {controller: "datepicker"} }  %>
+    <%= f.input :end_date,
+                as: :string,
+                label: "End Date",
+                input_html: { data: {controller: "datepicker"} }  %>
     <%= f.button :submit, "Book Now" %>
   <% end %>
 </div>
