@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <h1>List your lenses</h1>
+    <div class="col-8">
+      <%= simple_form_for @listing do |f| %>
+        <%= f.input :owner_description %>
+        <%= f.input :daily_rate %>
+        <%= f.input :lens_id, collection: Lens.all.map { |lens| [ "#{lens.brand} #{lens.model}", lens.id ] }, label: "Select Lens", input_html: { id: "select-lens", data: { controller: "listing" } } %>
+        <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+        <%= f.button :submit %>
+      <% end %>
+    </div>
+  </div>
+</div>
