@@ -10,7 +10,9 @@
       </h2>
     </div>
     <div class="col-md-4 text-center mb-3 mb-md-0">
+      <%# if the user attached a photo show the uploaded photo, otherwise just keep the line below %>
       <%= image_tag "https://image.pollinations.ai/prompt/lens+for+camera+#{@listing.lens.model.gsub(' ', '+')}", class: "img-fluid rounded", style: "max-height: 250px;" %>
+      <%# if there's multiple photos, show a carousel with the photos, if not show just one %>
     </div>
     <div class="col-md-8">
       <div class="card h-100">

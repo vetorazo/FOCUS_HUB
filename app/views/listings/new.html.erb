@@ -5,10 +5,16 @@
       <%= simple_form_for @listing do |f| %>
         <%= f.input :owner_description %>
         <%= f.input :daily_rate %>
-        <%= f.input :lens_id, collection: Lens.all.map { |lens| [ "#{lens.brand} #{lens.model}", lens.id ] }, label: "Select Lens", input_html: { id: "select-lens", data: { controller: "listing" } } %>
+        <%= f.input :lens_id, collection: Lens.all.map { |lens| [ "#{lens.brand} : #{lens.model}", lens.id ] }, label: "Select Lens", input_html: { id: "select-lens", data: { controller: "listing" } } %>
         <%= f.input :photos, as: :file, input_html: { multiple: true } %>
         <%= f.button :submit %>
       <% end %>
     </div>
   </div>
 </div>
+
+<%# first field is select lens %>
+<%# second is description %>
+<%# then daily rate %>
+<%# then photos %>
+<%# Put a button in the navbar to create %>

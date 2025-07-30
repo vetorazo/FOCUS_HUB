@@ -23,9 +23,9 @@ class ListingsController < ApplicationController
     @listing.user = current_user
 
     if @listing.save
-      redirect_to lens_listings_path(@listing.lens), notice: "Listing created successfully."
+      redirect_to listing_path(@listing), notice: "Listing created successfully."
     else
-      render :new, notice: "Failed to create listing."
+      render :new, status: :unprocessable_entity, notice: "Failed to create listing."
     end
   end
 
