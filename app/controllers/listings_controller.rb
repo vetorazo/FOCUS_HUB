@@ -13,6 +13,7 @@ class ListingsController < ApplicationController
     @review = @listing.reviews.new
     @booking = Booking.new
     @lens = @listing.lens
+    @blackout = Booking.new
   end
 
   def new
@@ -27,6 +28,17 @@ class ListingsController < ApplicationController
       redirect_to listing_path(@listing), notice: "Listing created successfully."
     else
       render :new, status: :unprocessable_entity, notice: "Failed to create listing."
+    end
+  end
+
+  def booked_dates
+    @listing = Listing.find(params[:id])
+    current_bookings = @listing.bookings.where("start_date >= ?", Date.today)
+    @current_booking_dates = current_bookings.map do |booking|
+      {
+        from: booking.start_date.to_s,
+        to: booking.end_date.to_s
+      }
     end
   end
 

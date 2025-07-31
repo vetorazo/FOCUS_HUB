@@ -3,20 +3,16 @@ import flatpickr from "flatpickr";
 
 // Connects to data-controller="datepicker"
 export default class extends Controller {
+  static values = {
+    currentBookings: Array
+  }
   connect() {
+    console.log("hello");
+    console.log(this.currentBookingsValue);
     flatpickr(this.element, {
       dateFormat: "Y-m-d",
       mode: "range",
-      disable: [
-          {
-              from: "2025-08-07",
-              to: "2025-08-09"
-          },
-          {
-              from: "2025-09-01",
-              to: "2025-12-01"
-          }
-      ]
+      disable: this.currentBookingsValue
     })
   }
 }

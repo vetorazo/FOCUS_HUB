@@ -2,7 +2,8 @@ class BlackoutsController < ApplicationController
   before_action :set_listing
 
   def create
-    @blackout = Booking.new(blackout_params)
+    date_range = params[:booking][:start_date].split(" to ")
+    @blackout = Booking.new(start_date: date_range[0], end_date: date_range[1])
     @blackout.listing = @listing
     @blackout.user = current_user
     @blackout.total_price = 0
@@ -22,9 +23,5 @@ class BlackoutsController < ApplicationController
   private
   def set_listing
     @listing = Listing.find(params[:listing_id])
-  end
-
-  def blackout_params
-    params.require(:booking).permit(:start_date, :end_date)
   end
 end
