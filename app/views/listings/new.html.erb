@@ -1,0 +1,76 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-light border-0 py-4">
+          <h1 class="h3 text-center mb-2 fw-bold">List Your Lenses</h1>
+          <p class="text-muted text-center mb-0">Share your photography gear with the community</p>
+        </div>
+        <div class="card-body p-5">
+          <%= simple_form_for @listing do |f| %>
+            <div class="row g-4">
+              <!-- Lens Selection -->
+              <div class="col-12">
+                <%= f.input :lens_id, 
+                    collection: Lens.all.map { |lens| [ "#{lens.brand} : #{lens.model}", lens.id ] }, 
+                    label: "Which lens are you listing?",
+                    input_html: { 
+                      id: "select-lens", 
+                      data: { controller: "listing" },
+                      class: "form-select form-select-lg"
+                    } %>
+              </div>
+              
+              <!-- Description -->
+              <div class="col-12">
+                <%= f.input :owner_description, 
+                    label: "Tell us about your lens",
+                    input_html: { 
+                      class: "form-control",
+                      rows: 4,
+                      placeholder: "What's the condition like? Any special features or notes for renters?"
+                    } %>
+              </div>
+              
+              <!-- Daily Rate -->
+              <div class="col-md-6">
+                <%= f.input :daily_rate, 
+                    label: "How much per day?",
+                    input_html: { 
+                      class: "form-control",
+                      placeholder: "0"
+                    } %>
+              </div>
+              
+              <!-- Photo Upload -->
+              <div class="col-12">
+                <label class="form-label">Add some photos</label>
+                <div class="p-4 border border-2 border-dashed rounded-3 text-center bg-light">
+                  <%= f.input :photos, 
+                      as: :file, 
+                      label: false,
+                      input_html: { 
+                        multiple: true,
+                        class: "form-control-file",
+                        style: "display: none;",
+                        id: "photo-upload"
+                      } %>
+                  <label for="photo-upload" class="mb-0">
+                    <i class="bi bi-cloud-upload fs-1 text-muted mb-3 d-block"></i>
+                    <h6 class="text-muted mb-2">Upload Photos</h6>
+                    <p class="text-muted small mb-0">Click to select multiple photos</p>
+                  </label>
+                </div>
+              </div>
+              
+              <!-- Submit Button -->
+              <div class="col-12 text-center pt-3">
+                <%= f.button :submit, "Create Listing", class: "btn btn-primary btn-lg px-5" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
