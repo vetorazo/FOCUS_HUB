@@ -1,5 +1,9 @@
 <div class="container mt-4">
-  <% if @lens %>
+  <h1 class="mt-4 mb-4"><strong>My Dashboard</strong></h1>
+  <p class="text-muted">You can view your listings own listings here.</p>
+  <hr>
+  <h2 class="mt-4 mb-4"><strong>My Listings</strong>
+ <!--  <% if @lens %>
     <h1 class="mb-4"><strong>About <%= @lens.model %> </strong></h1>
     <h5 class="mb-1"><strong>Description</strong></h5>
     <p><%= @lens.description %></p>
@@ -11,7 +15,7 @@
     <p class="text-muted">You can view your listings own listings here.</p>
     <hr>
     <h2 class="mt-4 mb-4"><strong>My Listings</strong>
-  <% end %>
+  <% end %> -->
 
   <% if @listings.any? %>
     <div class="row row g-4 flex-column">
@@ -22,8 +26,11 @@
                 class: "card-img-top py-3",
                 style: "height: 180px; object-fit: contain; background-color: #f8f9fa;" %>
             <div class="card-body mt-2 ms-2">
-              <h5 class="card-title">¥<%= listing.daily_rate %> per day</h5>
-              <p class="card-text"><%= truncate(listing.owner_description, length: 80, separator: ' ') %></p>
+              <h4 class="card-title mb-1 fw-bold">
+                <%= listing.lens.brand %><br>
+                <%= listing.lens.model %></h4>
+              <h3 class="text-muted mb-1">¥<%= listing.daily_rate %> per day</h3>
+              <h3 class="card-text"><%= truncate(listing.owner_description, length: 80, separator: ' ') %></h3>
 
               <div class="d-flex justify-content-center align-items-center mt-2">
                 <%= link_to "View Listing", listing_path(listing), class: "btn btn-primary" %>
