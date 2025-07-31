@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :lenses, only: %i[index show] do
     resources :listings, only: %i[index]
   end
+  resources :listings, only: %i[create new]
+
   resources :listings, only: %i[show] do
     post "blackouts", to: "blackouts#create"
     resources :bookings, only: %i[create]
