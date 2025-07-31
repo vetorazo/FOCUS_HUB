@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   root to: "lenses#index"
   get "/about", to: "pages#about"
 
-  get "/dashboard", to: "listings#dashboard", as: :dashboard
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -15,7 +14,7 @@ Rails.application.routes.draw do
   resources :lenses, only: %i[index show] do
     resources :listings, only: %i[index]
   end
-  resources :listings, only: %i[show] do
+  resources :listings, only: %i[index show] do
     resources :bookings, only: %i[create]
     resources :reviews, only: %i[create]
   end

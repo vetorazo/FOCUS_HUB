@@ -2,8 +2,12 @@ class ListingsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
 
   def index
-    @lens = Lens.find(params[:lens_id])
-    @listings = Listing.where(lens_id: @lens.id)
+    if params[:lens_id]
+      @lens = Lens.find(params[:lens_id])
+      @listings = @lens.listings
+    else
+      @listings = Listing.where(user: current_user)
+    end
   end
 
   def show
