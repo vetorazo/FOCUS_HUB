@@ -9,8 +9,23 @@
         </small>
       </h2>
     </div>
+
+    <%# If the user attached a photo show the uploaded photo, otherwise just keep the line below %>
+    <%# If there are multiple photos attached with cloudinary, show a carousel %>
     <div class="col-md-4 text-center mb-3 mb-md-0">
-      <%= image_tag "https://image.pollinations.ai/prompt/lens+for+camera+#{@listing.lens.model.gsub(' ', '+')}", class: "img-fluid rounded", style: "max-height: 250px;" %>
+      <% if @listing.photos.attached? %>
+        <div class="carousel slide">
+        <%= @listing.photos.each do |photo| %>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <%= cl_image_tag photo.key, class: "img-fluid rounded", style: "max-height: 250px;" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <%= image_tag "https://image.pollinations.ai/prompt/lens+for+camera+#{@listing.lens.model.gsub(' ', '+')}", class: "img-fluid rounded", style: "max-height: 250px;" %>
+      <% end %>
     </div>
     <div class="col-md-8">
       <div class="card h-100">
