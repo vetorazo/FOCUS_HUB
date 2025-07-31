@@ -2,6 +2,10 @@ class LensesController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
 
   def index
-    @lenses = Lens.all
+    if params[:query].present?
+      @lenses = Lens.search_by_brand_model_or_description(params[:query])
+    else
+      @lenses = Lens.all
+    end
   end
 end

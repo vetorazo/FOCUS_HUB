@@ -6,6 +6,7 @@ class Listing < ApplicationRecord
 
   validates :owner_description, presence: true, length: { minimum: 10 }
   validates :daily_rate, presence: true, numericality: { greater_than: 0 }
+  validates :lens_id, presence: true
 
   has_many :bookings
 end
