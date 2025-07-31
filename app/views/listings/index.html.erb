@@ -1,6 +1,6 @@
-<div class="container mt-4">
+<div class="container mt-4 listings-container">
   <h1 class="mb-4"><strong>About <%= @lens.model %> </strong></h1>
-  <h5 class="mb-1"><strong>Description</strong></h5>
+  <h2 class="mb-1"><strong>Description</strong></h2>
   <p><%= @lens.description %></p>
 
   <hr>
@@ -17,7 +17,7 @@
             <p class="card-text"><%= truncate(listing.owner_description, length: 80, separator: ' ') %></p>
 
             <div class="d-flex justify-content-center align-items-center mt-2">
-              <%= link_to "View Listing", listing_path(listing), class: "btn btn-primary" %>
+              <%= link_to "Details", listing_path(listing), class: "btn btn-primary" %>
             </div>
           </div>
         </div>
