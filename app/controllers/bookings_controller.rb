@@ -12,6 +12,7 @@ class BookingsController < ApplicationController
     else
       @reviews = @listing.reviews.all
       @review = @listing.reviews.new
+      @blackout = Booking.new
       render "listings/show", status: :unprocessable_entity
     end
   end
@@ -28,6 +29,8 @@ class BookingsController < ApplicationController
 
   def calculate_total_price
     number_of_days = (@booking.end_date - @booking.start_date)
+    return 1 if number_of_days.zero?
+
     number_of_days * @listing.daily_rate
   end
 end
