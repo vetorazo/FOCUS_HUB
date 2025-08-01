@@ -7,8 +7,8 @@ export default class extends Controller {
     currentBookings: Array
   }
   connect() {
-    console.log("hello");
-    console.log(this.currentBookingsValue);
+    // console.log("hello");
+    // console.log(this.currentBookingsValue);
     flatpickr(this.element, {
       dateFormat: "Y-m-d",
       mode: "range",
