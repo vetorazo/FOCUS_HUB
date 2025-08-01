@@ -1,5 +1,6 @@
 class LensesController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
+  before_action :set_lens, only: :show
 
   def index
     if params[:query].present?
@@ -7,5 +8,15 @@ class LensesController < ApplicationController
     else
       @lenses = Lens.all
     end
+  end
+
+  def show
+    @listings = @lens.listings
+  end
+
+  private
+
+  def set_lens
+    @lens = Lens.find(params[:id])
   end
 end
