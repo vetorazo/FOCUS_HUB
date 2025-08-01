@@ -7,11 +7,11 @@ export default class extends Controller {
     currentBookings: Array
   }
   connect() {
-    // console.log("hello");
-    // console.log(this.currentBookingsValue);
+    const now = new Date()
     flatpickr(this.element, {
       dateFormat: "Y-m-d",
       mode: "range",
+      minDate: "today",
       disable: this.currentBookingsValue
     })
   }

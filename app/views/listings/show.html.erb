@@ -87,11 +87,8 @@
       <%= f.input :start_date,
               as: :string,
               label: "Specify the blackout duration",
-              input_html: { data: {controller: "datepicker"} }  %>
+              input_html: { data: {controller: "datepicker", datepicker_current_bookings_value: @current_booking_dates} }  %>
       <%= f.button :submit, "Book Now" %>
     <%# <% end %>
   <% end %>
-
-  <div hidden data-controller="datepicker" data-datepicker-current-bookings-value="<%= @current_booking_dates.to_json %>">
-  </div>
 </div>

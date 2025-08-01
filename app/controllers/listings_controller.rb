@@ -14,7 +14,7 @@ class ListingsController < ApplicationController
     @booking = Booking.new
     @lens = @listing.lens
     @blackout = Booking.new
-    @current_booking_dates = booked_dates
+    @current_booking_dates = booked_dates(@listing)
   end
 
   def new
@@ -32,9 +32,8 @@ class ListingsController < ApplicationController
     end
   end
 
-  def booked_dates
-    @listing = Listing.find(params[:id])
-    current_bookings = @listing.bookings.where("start_date >= ?", Date.today)
+  def booked_dates(listing)
+    current_bookings = listing.bookings.where("start_date >= ?", Date.today)
     current_bookings.map do |booking|
       {
         from: booking.start_date.to_s,
