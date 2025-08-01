@@ -14,6 +14,7 @@ class ReviewsController < ApplicationController
     else
       @reviews = @listing.reviews.all
       @booking = @listing.bookings.new
+      @blackout = Booking.new
       render "listings/show", status: :unprocessable_entity
     end
   end
