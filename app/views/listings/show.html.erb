@@ -68,7 +68,7 @@
   </div>
   <hr>
 
-  <%# <% unless @current_user_is_owner %>
+  <% unless @current_user_is_owner %>
 
     <h2>Book This Listing</h2>
       <div class="alert-success">
@@ -77,7 +77,7 @@
 
     <%= render 'bookings/form', listing: @listing, booking: @booking %>
     <hr>
-  <%# <% else %>
+  <% else %>
     <h2>Blackout This Listing</h2>
       <div class="alert-success">
         <h5>Note: This feature is for listing owner only.</h5>
@@ -89,6 +89,6 @@
               label: "Specify the blackout duration",
               input_html: { data: {controller: "datepicker", datepicker_current_bookings_value: @current_booking_dates} }  %>
       <%= f.button :submit, "Book Now" %>
-    <%# <% end %>
+    <% end %>
   <% end %>
 </div>
