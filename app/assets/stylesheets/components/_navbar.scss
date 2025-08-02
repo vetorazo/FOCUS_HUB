@@ -9,6 +9,11 @@
 
 .nav-link {
   color: white;
+
+  &:hover {
+    transform: scale(1.05);
+    color: $yellow;
+  }
 }
 
 .navbar-lewagon .navbar-brand img {
@@ -23,9 +28,4 @@
   text-decoration: none;
   letter-spacing: -0.5px;
   transition: all 0.3s ease;
-
-  &:hover {
-    transform: scale(1.05);
-    color: darken($gray, 10%);
-  }
 }
