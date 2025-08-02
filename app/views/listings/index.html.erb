@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h1 class="mt-4 mb-4"><strong>My Dashboard</strong></h1>
+  <h1 class="mt-4 mb-4"><i class="fa-solid fa-table-list me-2"></i><strong>My Dashboard</strong></h1>
   <p class="text-muted">You can view your listings own listings here.</p>
   <hr>
   <h2 class="my-4"><strong>My Listings</strong>
@@ -45,12 +45,12 @@
                     <h4 class="card-title fw-bold text-dark mb-1">
                       <%= listing.lens.brand %>
                     </h4>
-                    <h5 class="text-muted mb-2"><%= listing.lens.model %></h5>
+                    <h5 class="text-muted mb-2"><i class="fa-solid fa-camera"></i> <%= listing.lens.model %></h5>
                   </div>
-                  <span class="badge bg-primary fs-6 px-3 py-2">¥<%= listing.daily_rate %>/day</span>
+                  <span class="badge bg-primary fs-6 px-3 py-2"><i class="fa-solid fa-coins"></i> <%= listing.daily_rate %>/day</span>
                 </div>
                 <p class="card-text text-muted mb-3">
-                  <%= truncate(listing.owner_description, length: 120, separator: ' ') %>
+                  <i class="fa-regular fa-hand-point-right"></i> <%= truncate(listing.owner_description, length: 120, separator: ' ') %>
                 </p>
               </div>
             </div>

@@ -8,7 +8,9 @@
             class: "form-control",
             placeholder: "Search by brand, model, or lens type"
         %>
-      <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+      <button type="submit" name="" class="btn btn-primary d-flex align-items-center">
+        <i class="fa-solid fa-magnifying-glass me-1"></i>Search
+      </button>
     <% end %>
   </div>
 </div>
@@ -23,8 +25,8 @@
             <%= cl_image_tag(lens.photo.key, class: "card-img-top py-3", style: "height: 180px; object-fit: contain;background-color: #f8f9fa;") %>
             <div class="card-body mt-2 ms-2">
               <h5 class="card-title"><strong><%= lens.brand %></strong></h5>
-              <p class="card-text"><strong>Model:</strong> <%= lens.model %></p>
-              <p class="card-text"><%= truncate(lens.description, length: 80, separator: ' ') %></p>
+              <p class="card-text"><i class="fa-solid fa-camera"></i> <strong>Model:</strong> <%= lens.model %></p>
+              <p class="card-text"><i class="fa-regular fa-hand-point-right"></i><%= truncate(lens.description, length: 80, separator: ' ') %></p>
             </div>
           </div>
         <% end %>

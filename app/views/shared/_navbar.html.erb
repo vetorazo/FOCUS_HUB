@@ -11,15 +11,21 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
+          <li class="nav-item active">
+            <%= link_to root_path, class: "nav-link" do %>
+              <i class="fa-solid fa-house me-1"></i>Home
+            <% end %>
+          </li>
           <li class="nav-item">
-            <%= link_to "My Dashboard", listings_path, class: "nav-link" %>
+            <%= link_to listings_path, class: "nav-link" do %>
+              <i class="fa-solid fa-table-list me-1"></i>My Dashboard
+            <% end %>
           </li>
 
-          <li class="nav-item active">
-            <%= link_to "Home", root_path, class: "nav-link" %>
-          </li>
           <li class="nav-item">
-            <%= link_to "List your lens", new_listing_path, class: "nav-link" %>
+            <%= link_to new_listing_path, class: "nav-link" do %>
+              <i class="fa-solid fa-plus me-1"></i>List your lens
+            <% end %>
           </li>
 
           <li class="nav-item dropdown">
