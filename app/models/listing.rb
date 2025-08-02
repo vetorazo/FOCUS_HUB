@@ -9,4 +9,13 @@ class Listing < ApplicationRecord
   validates :lens_id, presence: true
 
   has_many :bookings
+
+  def booked_dates
+    bookings.upcoming.map do |booking|
+      {
+        from: booking.start_date.to_s,
+        to: booking.end_date.to_s
+      }
+    end
+  end
 end

@@ -21,4 +21,6 @@ Rails.application.routes.draw do
     resources :bookings, only: %i[create]
     resources :reviews, only: %i[create]
   end
+
+  resources :bookings, only: [:update]
 end
