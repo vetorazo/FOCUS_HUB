@@ -4,9 +4,9 @@ class LensesController < ApplicationController
 
   def index
     if params[:query].present?
-      @lenses = Lens.search_by_brand_model_or_description(params[:query])
+      @lenses = Lens.search_by_brand_model_or_description(params[:query]).order(:brand, :model)
     else
-      @lenses = Lens.all
+      @lenses = Lens.all.order(:brand, :model)
     end
   end
 
