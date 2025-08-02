@@ -17,7 +17,7 @@
                     <div class="carousel-inner h-100">
                       <% listing.photos.each_with_index do |photo, i| %>
                         <div class="carousel-item <%= "active" if i == 0 %> h-100">
-                          <%= cl_image_tag photo.key, class: "card-image", crop: :fill %>
+                          <%= cl_image_tag photo.key, class: "card-image",style: "height: 300px;", crop: :fill %>
                         </div>
                       <% end %>
                     </div>
@@ -49,7 +49,6 @@
                   </div>
                   <span class="badge bg-primary fs-6 px-3 py-2">¥<%= listing.daily_rate %>/day</span>
                 </div>
-                
                 <p class="card-text text-muted mb-3">
                   <%= truncate(listing.owner_description, length: 120, separator: ' ') %>
                 </p>
