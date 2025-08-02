@@ -10,9 +10,18 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "listings/index";
 
 body {
-  background: #ffc300;
+  h1, h2, h3 {
+    font-family: poppins, sans-serif;
+    color: #001D3D;
+  }
+
+  p {
+    font-family: montserrat, sans-serif;
+    font-size: 16px;
+  }
 }
 
 .nested-card-link {
