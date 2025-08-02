@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_listing
+  before_action :set_listing, only: %i[create]
 
   def create
     # Get the start date as the string out
@@ -22,6 +22,22 @@ class BookingsController < ApplicationController
     end
   end
 
+  def update
+    @booking = Booking.find(params[:id])
+    @listing = @booking.listing
+    if @booking.update(booking_params)
+      redirect_to listing_path(@listing)
+    else
+      @current_user_is_owner = @listing.user == current_user
+      @reviews = @listing.reviews.includes(:user)
+      @review = @listing.reviews.new
+      @booking = Booking.new
+      @lens = @listing.lens
+      @blackout = Booking.new
+      render "listings/show", status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_listing
@@ -33,5 +49,9 @@ class BookingsController < ApplicationController
     return 1 if number_of_days.zero?
 
     number_of_days * @listing.daily_rate
+  end
+
+  def booking_params
+    params.require(:booking).permit(:status)
   end
 end

@@ -8,6 +8,8 @@ class Booking < ApplicationRecord
   validate :booking_date_cannot_be_reverse
   # validate :booking_date_cannot_overlap
 
+  scope :upcoming, -> { where("start_date >= ?", Date.today) }
+
   def start_date_cannot_be_in_the_past
     if start_date.present? && start_date < Date.today
       errors.add(:start_date, "can't be in the past")
