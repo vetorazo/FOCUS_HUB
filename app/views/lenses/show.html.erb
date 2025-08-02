@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <h1 class="mb-4"><strong>About <%= @lens.model %> </strong></h1>
+  <h5 class="mb-1"><strong>Description</strong></h5>
+  <p><%= @lens.description %></p>
+
+  <hr>
+  <h2 class="mt-4 mb-4"><strong>Listings for: <%= @lens.model %></strong></h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% @listings.each do |listing| %>
+      <div class="col">
+        <%= link_to listing_path(listing), class: "nested-card-link" do %>
+        <div class="card h-100 border-primary border-2 rounded">
+          <% if listing.photos.attached? %>
+            <div id="carousel" class="carousel slide">
+              <div class="carousel-inner">
+                <% listing.photos.each_with_index do |photo, i| %>
+                  <div class="carousel-item <%= "active" if i == 0 %>">
+                    <%= cl_image_tag photo.key, class: "img-fluid rounded", style: "height: 250px; width: 400px;", crop: :fill %>
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                <% end %>
+              </div>
+            </div>
+          <% else %>
+            <%= image_tag "https://image.pollinations.ai/prompt/lens+for+camera+#{listing.lens.model.gsub(' ', '+')}", class: "img-fluid rounded", style: "max-height: 250px;" %>
+          <% end %>
+          <div class="card-body mt-2 ms-2">
+            <h5 class="card-title">¥<%= listing.daily_rate %> per day</h5>
+            <p class="card-text"><%= truncate(listing.owner_description, length: 80, separator: ' ') %></p>
+          </div>
+        </div>
+      <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
