@@ -11,7 +11,7 @@ class BlackoutsController < ApplicationController
     @blackout.status = :blockouted
 
     if @blackout.save
-      redirect_to @listing, notice: "Lens blockouted successfully!"
+      redirect_to @listing, notice: "Lens is now unavailable!"
     else
       @reviews = @listing.reviews.all
       @review = @listing.reviews.new
