@@ -1,10 +1,10 @@
 <div class="container mt-4">
-  <h1 class="mb-4"><strong>About <%= @lens.model %> </strong></h1>
-  <h5 class="mb-1"><strong>Description</strong></h5>
+  <h1 class="mb-4"><strong><i class="fa-solid fa-camera me-2"></i>About <%= @lens.model %></strong></h1>
+  <h5 class="mb-1"><strong><i class="fa-solid fa-info-circle me-2"></i>Description</strong></h5>
   <p><%= @lens.description %></p>
 
   <hr>
-  <h2 class="mt-4 mb-4"><strong>Listings for: <%= @lens.model %></strong></h2>
+  <h2 class="mt-4 mb-4"><strong><i class="fa-solid fa-list me-2"></i>Listings for: <%= @lens.model %></strong></h2>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <% @listings.each do |listing| %>
       <div class="col">
@@ -32,8 +32,8 @@
             <%= image_tag "https://image.pollinations.ai/prompt/lens+for+camera+#{listing.lens.model.gsub(' ', '+')}", class: "img-fluid rounded", style: "max-height: 250px;" %>
           <% end %>
           <div class="card-body mt-2 ms-2">
-            <h5 class="card-title">¥<%= listing.daily_rate %> per day</h5>
-            <p class="card-text"><%= truncate(listing.owner_description, length: 80, separator: ' ') %></p>
+            <h5 class="card-title"><i class="fa-solid fa-coins me-1"></i><%= listing.daily_rate %> per day</h5>
+            <p class="card-text"><i class="fa-regular fa-hand-point-right me-1"></i><%= truncate(listing.owner_description, length: 80, separator: ' ') %></p>
           </div>
         </div>
       <% end %>
