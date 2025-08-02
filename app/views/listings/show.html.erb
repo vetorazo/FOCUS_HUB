@@ -50,7 +50,7 @@
     </div>
   </div>
 
-  <% unless @listing.bookings.where(user: current_user).empty? %>
+  <% if @listing.bookings.where(user: current_user).any? && !@current_user_is_owner%>
     <%= render 'reviews/form', review: @review, listing: @listing %>
   <% end %>
 
@@ -78,20 +78,42 @@
   </div>
 
   <!-- Booking details and form remain unchanged -->
-  <div class="display-booking-details">
-    <% if @listing.bookings.empty? || !@listing.bookings.empty? && @listing.bookings.where(user: current_user).empty?%>
-      <h4><i class="fa-solid fa-calendar-plus me-2"></i>You have no bookings for this listing yet! Book now! 👇</h4>
+  <% unless @current_user_is_owner %>
+    <div class="display-booking-details">
+      <% if @listing.bookings.where(user: current_user).empty?%>
+        <h4>You have no bookings for this listing yet! Book now! 👇</h4>
+      <% end %>
+      <% if @listing.bookings.where(user: current_user).any?%>
+        <h4>Your booking details:</h4>
+        <% booking = @listing.bookings.where(user: current_user).last%>
+        <p> Start date: <%= booking.start_date %> </p>
+        <p> End date: <%= booking.end_date %> </p>
+        <p> Total price: ¥<%= booking.total_price %> </p>
+        <p> Status: <%= booking.status.capitalize %> </p>
+      <% end %>
+    </div>
+  <% else %>
+    <h4>Upcoming bookings</h4>
+    <% @listing.bookings.upcoming.each do |booking| %>
+      <% if booking.user == current_user %>
+        <p>Username: <%= booking.user.user_name %> (Me)</p>
+        <p> Start date: <%= booking.start_date %> </p>
+        <p> End date: <%= booking.end_date %> </p>
+        <p> Status: <%= booking.status.capitalize %> </p>
+      <% else %>
+        <p>Username: <%= booking.user.user_name %></p>
+        <p> Start date: <%= booking.start_date %> </p>
+        <p> End date: <%= booking.end_date %> </p>
+        <p> Total price: ¥<%= booking.total_price %> </p>
+        <p> Status: <%= booking.status.capitalize %> </p>
+        <%= simple_form_for(booking) do |f| %>
+          <%= f.input :status, collection: Booking.statuses.keys, prompt: "Select Status", label: "Update Status"%>
+          <%= f.button :submit, "Update" %>
+        <% end %>
+      <% end %>
+      <hr>
     <% end %>
-    <% if !@listing.bookings.empty? && !@listing.bookings.where(user: current_user).empty?%>
-      <h4><i class="fa-solid fa-receipt me-2"></i>Your booking details:</h4>
-      <% booking = @listing.bookings.where(user: current_user).last%>
-      <p> Start date: <%= booking.start_date %> </p>
-      <p> End date: <%= booking.end_date %> </p>
-      <p> Total price: ¥<%= booking.total_price %> </p>
-      <p> Status: <%= booking.status.capitalize %> </p>
-    <% end %>
-  </div>
-  <hr>
+  <% end %>
 
   <% unless @current_user_is_owner %>
 
@@ -112,7 +134,7 @@
       <%= f.input :start_date,
               as: :string,
               label: "Specify the blackout duration",
-              input_html: { data: {controller: "datepicker", datepicker_current_bookings_value: @current_booking_dates} }  %>
+              input_html: { data: {controller: "datepicker", datepicker_current_bookings_value: @listing.booked_dates} }  %>
       <%= f.button :submit, "Book Now" %>
     <% end %>
   <% end %>
