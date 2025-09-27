@@ -12,6 +12,10 @@ class LensesController < ApplicationController
 
   def show
     @listings = @lens.listings
+    respond_to do |format|
+      format.html { render :show, format: :html }
+      format.json { render json: @listings }
+    end
   end
 
   private
